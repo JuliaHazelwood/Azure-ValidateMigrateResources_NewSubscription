@@ -22,7 +22,7 @@ To keep things simple, I have chosen to make the target resource group the same 
 
 The target subscription needs to have the required Resource Providers registered, otherwise you will get output full of errors. 
 
-Either register one by one in the portal, or if you are like me and do not like doing repetitive things by hand :smile: here is a link to a script I wrote to use an input CSV file to loop through and register each one:
+Either register one by one in the portal, or if you are like me and do not like doing repetitive things by hand :smile: here is a link to a script I wrote to use an input CSV file to loop through and register each one: https://github.com/JuliaHazelwood/Azure-Register_MultipleAzResourceProviders_fromCSV
 
 ### Service Principal
 
@@ -36,7 +36,7 @@ The permissions needed to perform the 'Validate Move Resources' operation are ou
 
 #### * Resource Group level (target Resource Group) - custom RBAC role JSON:
 
-Some of the actions listed showed up when analyzing an environment, when testing in your environemtn depending on the resource type, may need more / less actions. The standard required actions are:
+Some of the actions listed showed up when analyzing an environment, when testing in your environment depending on the resource type, may need more / less actions. The standard required actions are:
 * '*/read'
 * 'Microsoft.Resources/subscriptions/resourceGroups/validateMoveResources/action'
 
@@ -62,3 +62,13 @@ Some of the actions listed showed up when analyzing an environment, when testing
 
 The script writes to the following path: `C:\Users\$env:USERNAME\Documents\ValidateResourceMoves.txt`
 ensure that when running, the user has rights to this path for the output otherwise change to some other path.
+
+### Variables to update in PowerShell script
+
+In the PowerShell file located in this repo titled **Validate_AzResourceMoveToNewSubscription.ps1**, will need to update some of the variables in the file. Below is a list and the corresponding line number describing what needs to be updated before running the script:
+
+* `$ClientID` - Line 4 - this is the in the portal labeled **Application (client) ID** in Azure AD
+* `$client_Secret` - Line 5 - this is gathered from the portal upon creation of Service Principal, upon leaving the page you can no longer go back to this. If did not notate, simply create a new secret.
+* `$tenant_id` - Line 7 - this is the tenant ID of the Azure Active Directory associated with the subscription that the resources currently exist in.
+* `$SubscriptionID` - Line 26 - subscription ID of the source where resources currently exist
+* `$targetResourceGroup` - Line 75 - for this variable, update the guid for target subscription and resource group name. In my example, I am hardcoding the same target resource group simply to determine can the resources be moved. Of course, when actually going through with moving resources more than one target resource group would be used. 

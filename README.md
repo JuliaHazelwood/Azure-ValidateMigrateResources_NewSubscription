@@ -2,7 +2,7 @@
 
 ## Intro / Problem Description
 
-While it is possible to move resources to a new subscription using the Azure portal, if you want to first validate whether or not resources can be moved or if there are errors, this is not yet a capability that exists in the portal.
+While it is possible to move resources to a new subscription using the Azure portal, if you want to first validate whether resources can be moved or if there are errors, this is not yet a capability that exists in the portal.
 
 In order to determine ahead of time and plan accordingly if the resources (entire Resource Group) can be moved or need to make adjustments, this requires the use of the REST API 'Resources - Validate Move Resources' (https://docs.microsoft.com/en-us/rest/api/resources/resources/validate-move-resources)
 
@@ -10,11 +10,11 @@ There are a few existing blogs which provide step by step on how to check one Re
 * This blog uses Postman which is easy to setup without much scripting experience (https://www.cloudcorner.gr/microsoft/azure/validate-azure-resource-move-with-postman/)
 * Another blog uses a PowerShell script which some may prefer, but only checks one Resource Group at a time (https://www.pedholtlab.com/migrate-between-azure-subscriptions-like-a-pro/)
 
-While these are great resources to check individual Resource Group moves before attempting, I have had many customer scenarios needing to assess their entire Azure environments, namely moving out of CSP type subscriptions. In these cases plugging in one Resource Group at a time would be an arduous task.
+While these are great resources to check individual Resource Group moves before attempting, I have had many customer scenarios needing to assess their entire Azure environments, namely moving out of CSP type subscriptions. In these scenarios plugging in one Resource Group at a time would be an arduous task.
 
 The script in this repository assesses an entire Azure subscription, and outputs in a text file whether resources can be moved as-is (entire resource group) and lists any resources needing attention before attempting the move.
 
-To keep things simple, I have chosen to make the target resource group the same for all. In a real world scenario, when completeing the move would have a target Resource Group mapped to existing Resource Groups. Since we are not actually moving anything, only validating, using the same Resource Group as a target should not be an issue.
+To keep things simple, I have chosen to make the target resource group the same for all. In a real-world scenario, when completeing the move would have a target Resource Group mapped to existing Resource Groups. Since we are not actually moving anything, only validating, using the same Resource Group as a target should not be an issue.
 
 ## Pre-requisite steps to run script
 
@@ -71,7 +71,7 @@ In the PowerShell file located in this repo titled **Validate_AzResourceMoveToNe
 * `$client_Secret` - Line 5 - this is gathered from the portal upon creation of Service Principal, upon leaving the page you can no longer go back to this. If did not notate, simply create a new secret.
 * `$tenant_id` - Line 7 - this is the tenant ID of the Azure Active Directory associated with the subscription that the resources currently exist in.
 * `$SubscriptionID` - Line 26 - subscription ID of the source where resources currently exist
-* `$targetResourceGroup` - Line 75 - for this variable, update the guid for target subscription and resource group name. In my example, I am hardcoding the same target resource group simply to determine can the resources be moved. Of course, when actually going through with moving resources more than one target resource group would be used.
+* `$targetResourceGroup` - Line 75 - for this variable, update the guid for target subscription and resource group name. In my example, I am hardcoding the same target resource group simply to determine can the resources be moved. Of course, when going through with moving resources more than one target resource group would be used.
 
 ### Common errors when running the script
 

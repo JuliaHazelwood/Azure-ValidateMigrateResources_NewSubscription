@@ -71,4 +71,11 @@ In the PowerShell file located in this repo titled **Validate_AzResourceMoveToNe
 * `$client_Secret` - Line 5 - this is gathered from the portal upon creation of Service Principal, upon leaving the page you can no longer go back to this. If did not notate, simply create a new secret.
 * `$tenant_id` - Line 7 - this is the tenant ID of the Azure Active Directory associated with the subscription that the resources currently exist in.
 * `$SubscriptionID` - Line 26 - subscription ID of the source where resources currently exist
-* `$targetResourceGroup` - Line 75 - for this variable, update the guid for target subscription and resource group name. In my example, I am hardcoding the same target resource group simply to determine can the resources be moved. Of course, when actually going through with moving resources more than one target resource group would be used. 
+* `$targetResourceGroup` - Line 75 - for this variable, update the guid for target subscription and resource group name. In my example, I am hardcoding the same target resource group simply to determine can the resources be moved. Of course, when actually going through with moving resources more than one target resource group would be used.
+
+### Common errors when running the script
+
+You may come across some errors when running the script, here are just a few and how to resolve:
+* Invalid token - check that your information for the AAD Service Principal is correct
+* Missing resource provider - see above section on how to easily mirror resource providers in target subscription
+* Not enough permissions - see above section on permissions needed to validate the resource move
